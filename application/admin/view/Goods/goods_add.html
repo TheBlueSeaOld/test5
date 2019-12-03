@@ -1,0 +1,227 @@
+{include file='common/_meta'}
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/webuploader/css/webuploader.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/webuploader/examples/image-upload/style.css" />
+<body>
+<div class="page-container">
+	<form action="{:url('goods/goods_log')}" method="post" enctype="multipart/form-data" class="form form-horizontal" id="form-article-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="goods_name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属分类：</label>			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="cat_id" class="select">
+					{volist name='cat_data' id='v'}
+					<option value="{$v.id}">{$v.cat_name}</option>
+					{/volist}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>品牌：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="brand_id" class="select">
+					{volist name='brands_data' id='v'}
+						<option value="{$v.id}">{$v.brand_name}</option>
+					{/volist}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类型：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="type_id" class="select">
+					{volist name='type_data' id='v' empty='暂未检测到类型数据'}
+						<option value="{$v.id}">{$v.type_name}</option>
+					{/volist}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">市场价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="market_price">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">本店价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="shop_price">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">赠送积分：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="jifen">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">赠送经验值：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="jyz">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">积分价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="jifen_price">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否促销：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				 是 <input type="radio"  value="" placeholder="" id="" name="is_promote" class='is_promote_true'>&nbsp   &nbsp  &nbsp  
+				 否 <input type="radio"  value="" checked placeholder="" id="" name="is_promote">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" readonly value="" placeholder="" id="" name="promote_price">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销开始时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" readonly value="" placeholder="" id="" name="promote_start_time">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销结束时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" readonly value="" placeholder="" id="" name="promote_end_time">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">Logo：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="file" value="" placeholder="产品缩略图" id="" name="userfile">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">商品描述：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="goods_desc">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">热卖：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="checkbox"  value="" placeholder="" id="" name="is_hot">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">热卖：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="checkbox" value="" placeholder="" id="" name="is_new">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">顶级：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="checkbox" value="" placeholder="" id="" name="is_best">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否上架：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="checkbox" value="" placeholder="" id="" name="is_on_sale">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">关键字：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" name="seo_keyword">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">排序：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="number" class="input-text" value="" placeholder="" id="" name="sort_num">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">放入回收站：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				 是 <input type="checkbox"  value="" placeholder="" id="" name="is_delete"> &nbsp   &nbsp   &nbsp   
+				 否 <input type="checkbox"  value="" placeholder="" id="" name="is_delete">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品摘要：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">缩略图：</label>
+			<div id="wrapper">
+				<div id="container">
+					<!--头部，相册选择和格式选择-->
+
+					<div id="uploader">
+						<div class="queueList">
+							<div id="dndArea" class="placeholder">
+								<div id="filePicker"></div>
+								<p>或将照片拖到这里，单次最多可选300张</p>
+							</div>
+						</div>
+						<div class="statusBar" style="display:none;">
+							<div class="progress">
+								<span class="text">0%</span>
+								<span class="percentage"></span>
+							</div><div class="info"></div>
+							<div class="btns">
+								<div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">详细内容：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<script id="editor" type="text/plain" style="width:100%;height:400px;"></script> 
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+{include file='common/_footer'}
+<script type="text/javascript" src="__PUBLIC__/webuploader/examples/image-upload/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/webuploader/dist/webuploader.js"></script>
+<script type="text/javascript" src="__PUBLIC__/webuploader/examples/image-upload/upload.js"></script>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+
+
+<script type="text/javascript">
+
+       
+
+$(function(){
+	var ue = UE.getEditor('editor');
+});
+</script>
+</body>
+</html>

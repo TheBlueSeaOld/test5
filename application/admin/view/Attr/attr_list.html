@@ -1,0 +1,113 @@
+{include file="common/_header"}
+{include file="common/_meta"}
+{include file="common/_menu"}
+<style>
+	.Hui-article{
+		margin:20px;
+	}
+	table{
+		margin:50px 100px;
+	}
+	th,td{
+		border:1px solid black;
+		text-align:center;
+	}
+	.addUrl{
+		color:red;
+		margin:20px 30px;
+	}
+</style>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.add_attr').click(function (){
+			var str="属性名：<input type='text' name='attr_name[]'></td> <td>类型<select name='attr_type[]'><option value=1>单一属性</option><option value=2>多选属性</option></select></td> <td>属性值：<input type='text' name='attr_option_value[]'></td><td>所属类型：<input type='number' readonly value='<?php echo request()->param('type_id');?>' name='type_id'></td><br><br>";
+			$('.sub').before(str);
+		})
+	})
+</script>
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>t
+		产品管理
+		<span class="c-gray en">&gt;</span>
+		属性列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+	<div class="Hui-article">
+		<div class='addUrl'><a href="{:url('type/type_add')}">[ 属性编辑 ]</a></div>
+
+		<table>
+			<tr><th>8</th></tr>
+			<tr><th>属性ID</th><th>类型</th><th>名称</th><th>属性值</th><th>操作</th></tr>
+			{volist name='data' id='v' empty="暂无属性，请手动添加"}
+			<tr>
+				<td>{$v.attr_id}</td><td>{$v.attr_type}</td><td>{$v.attr_name}</td><td>{$v.attr_option_value}</td>
+				<td>
+					<a href="{:url('attr/attr_ajax_log',array('id'=>$v['attr_id']))}">修改</a>
+					 | 
+					<a href="{:url('attr/attr_del',array('id'=>$v['attr_id'],'type_id'=>$v['type_id']))}">删除</a>
+				</td>
+			</tr>
+			{/volist}
+		</table>
+		<div class='add_attr'>[ 添加新属性 ]</div>
+		<form method='post' action="{:url('attr/attr_log',array('id'=>request()->param('id')))}">
+			<td>所属类型：<input type='number' readonly value='<?php echo request()->param('type_id');?>' name='type_id'></td>
+			<br><input class='sub' type='submit' value="添加">
+		</form>	
+			
+	</div>
+</section>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/laypage/1.2/laypage.js"></script> 
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-增加*/
+function admin_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-删除*/
+function admin_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
+/*管理员-编辑*/
+function admin_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-停用*/
+function admin_stop(obj,id){
+	layer.confirm('确认要停用吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		
+		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
+		$(obj).remove();
+		layer.msg('已停用!',{icon: 5,time:1000});
+	});
+}
+
+/*管理员-启用*/
+function admin_start(obj,id){
+	layer.confirm('确认要启用吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		
+		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+		$(obj).remove();
+		layer.msg('已启用!', {icon: 6,time:1000});
+	});
+}
+</script> 
+{include file="common/_footer"}

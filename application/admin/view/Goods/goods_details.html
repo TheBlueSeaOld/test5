@@ -1,0 +1,134 @@
+{include file='common/_meta'}
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/webuploader/css/webuploader.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/webuploader/examples/image-upload/style.css" />
+<body>
+<div class="page-container">
+	<form action="{:url('goods/goods_log')}" method="post" enctype="multipart/form-data" class="form form-horizontal" id="form-article-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名：</label>
+			<?php echo $goods_data['goods_name'] ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属分类：</label>	
+			<?php echo $cat; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>品牌：</label>
+			<?php echo $brands; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类型：</label>
+			<?php echo $goods_type; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">市场价格：</label>
+			<?php echo $goods_data['market_price']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">本店价格：</label>
+			<?php echo $goods_data['shop_price']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">赠送积分：</label>
+			<?php echo $goods_data['jifen']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">赠送经验值：</label>
+			<?php echo $goods_data['jyz'];?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">积分价格：</label>
+			<?php echo $goods_data['jifen_price']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否促销：</label>
+			<?php if($goods_data['is_promote']!=0){echo '促销中';}else{echo '原价';} ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销价格：</label>
+			<?php echo $goods_data['promote_price']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销开始时间：</label>
+			<?php echo $goods_data['promote_start_time']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">促销结束时间：</label>
+			<?php echo $goods_data['promote_end_time']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">Logo：</label>
+			<?php echo $goods_data['logo']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">商品描述：</label>
+			<?php echo $goods_data['goods_desc']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">热卖：</label>
+			<?php if($goods_data['is_hot']){echo "无";}else{echo "是";}; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">最新：</label>
+			<?php if($goods_data['is_new']){echo '无';}else{echo '是';}; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">顶级：</label>
+			<?php if($goods_data['is_best']){echo '无';}else{echo '是';}; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否上架：</label>
+			<?php if($goods_data['is_on_sale']){echo '无';}else{echo '是';}; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">关键字：</label>
+			<?php echo $goods_data['seo_keyword']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">排序：</label>
+			<?php echo $goods_data['sort_num']; ?>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">放入回收站：</label>
+			<?php echo $goods_data['is_delete']; ?>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">详细内容：</label>
+			<?php if(strlen($text)>=40){ echo substr($text,0,40); }else{echo 111;} ?>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+{include file='common/_footer'}
+<script type="text/javascript" src="__PUBLIC__/webuploader/examples/image-upload/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/webuploader/dist/webuploader.js"></script>
+<script type="text/javascript" src="__PUBLIC__/webuploader/examples/image-upload/upload.js"></script>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+
+
+<script type="text/javascript">
+
+       
+
+$(function(){
+	var ue = UE.getEditor('editor');
+});
+</script>
+</body>
+</html>
